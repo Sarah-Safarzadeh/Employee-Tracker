@@ -137,6 +137,7 @@ function addRole() {
                 })
         })
 };
+
 function addEmployee() {
     inquirer.prompt([{
         name: 'firstName',
@@ -177,4 +178,25 @@ function addEmployee() {
                     menu();
                 })
         })
+    };
+
+    function updateEmployee() {
+        inquirer.prompt([{
+                    name: 'employee',
+                    type: 'number',
+                    message: 'Enter employee ID'
+                },
+                {
+                    name: 'role',
+                    type: 'number',
+                    message: 'Enter role ID:'
+                }
+            ])
+            .then(response => {
+                connection.query('UPDATE employee SET role_id = ? WHERE id = ? ', [response.role, response.employee], (error, result) => {
+                    if (error) throw error;
+    
+                    viewEmployees();
+                })
+            })
     };
