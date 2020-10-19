@@ -11,6 +11,14 @@ const connection = mysql.createConnection({
     database: 'company'
 });
 
+connection.connect(err => {
+    if (err) throw err;
+
+    console.log('Employee Tracker Iniatated');
+
+    menu();
+})
+
 // FUNCTIONS
 function menu() {
     inquirer.prompt([{
