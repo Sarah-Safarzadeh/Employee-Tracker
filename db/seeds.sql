@@ -26,3 +26,9 @@ VALUES
 ('Raj', 'Mason', 1, null),
 ('Gearson', 'Rolly', 4, null),
 ('Fiona', 'Apple', 1, null);
+
+INSERT INTO manager (first_name, last_name, role_id, department_id)
+VALUES
+('Sweetheart', 'Shore', 1, 1),
+('Sunrise', 'Moonset', 2, 2),
+('Smiles', 'Devon', 3, 3),
