@@ -137,3 +137,44 @@ function addRole() {
                 })
         })
 };
+function addEmployee() {
+    inquirer.prompt([{
+        name: 'firstName',
+        type: 'input',
+        message: 'Input first name of employee: '
+    },
+    {
+        name: 'lastName',
+        type: 'input',
+        message: 'Input last name of employee: '
+    },
+    {
+        name: 'role',
+        type: 'list',
+        message: 'Select role:',
+        choices: getRoles()
+    },
+    {
+        name: 'manager',
+        type: 'list',
+        message: 'Select reporting manager:',
+        choices: getManagers()
+    }
+    ])
+        .then(response => {
+
+            connection.query('INSERT INTO employee SET ?', {
+                first_name: response.firstName,
+                last_name: response.lastName,
+                role_id: response.role,
+                manager_id: response.manager
+            },
+
+                (err, res) => {
+                    if (err) throw err;
+                    console.log('Employee created.')
+
+                    menu();
+                })
+        })
+    };
