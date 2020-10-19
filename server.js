@@ -98,7 +98,42 @@ function addDepartment() {
 
 function addRole() {
     inquirer.prompt([{
-                name: 'name',
-                type: 'input',
-                message: 'Input the role name: '
+        name: 'name',
+        type: 'input',
+        message: 'Input the role title: '
+    },
+    {
+        name: 'salary',
+        type: 'number',
+        message: 'Input salary: ',
+        validate: salary => {
+            if (salary) {
+                return true;
+            } else {
+                console.log('Please enter a numerical value');
+                return false;
+            }
+        }
+    },
+    {
+        name: 'department',
+        type: 'list',
+        message: 'Select from departments:',
+        choices: getDepartments()
+    }
+    ])
+        .then(res => {
+            connection.query('INSERT INTO role SET ?', {
+                title: res.role,
+                salary: res.salary,
+                department_id: res.department
             },
+
+                (err, res) => {
+                    if (err) throw err;
+                    console.log('Role has been added')
+
+                    menu();
+                })
+        })
+};
